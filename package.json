@@ -1,0 +1,10 @@
+{
+  "name": "react-native-routes",
+  "version": "1.0.0",
+  "description": "A react native router with awesome transitions.",
+  "main": "index.js",
+  "author": "Sam Wenke",
+  "peerDependencies": {
+    "react-native": "^0.7.1"
+  }
+}
