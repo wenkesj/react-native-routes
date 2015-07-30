@@ -1,3 +1,4 @@
+```
 {  
    SceneConfigs:{  
       PushFromRight:{  
@@ -192,3 +193,4 @@
       sceneStyle:13
    }
 }
+```
