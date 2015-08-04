@@ -31,7 +31,7 @@ var Router = React.createClass({
     _handleBack: function(route,navigator) {
         if (this.state.route.index > 0) {
             if (route.configureScene) {
-                navigator.props.configureScene = route.configureScene;
+                this.setState({sceneConfig: route.configureScene()});
             }
             navigator.pop();
         }
@@ -40,7 +40,7 @@ var Router = React.createClass({
         route.index = this.state.route.index + 1;
         this.state.route.index = route.index;
         if (route.configureScene) {
-            navigator.props.configureScene = route.configureScene;
+            this.setState({sceneConfig: route.configureScene()});
         }
         navigator.push(route);
     },
@@ -72,7 +72,7 @@ var Router = React.createClass({
             <Navigator
                 initialRoute={this.props.firstRoute}
                 renderScene={this.renderScene}
-                configureScene={this.props.configureScene ? this.props.configureScene : () => {return Navigator.SceneConfigs.FloatFromBottom;}}/>
+                configureScene={() => {return this.state.sceneConfig;}}/>
         )
     }
 });

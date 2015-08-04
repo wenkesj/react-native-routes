@@ -2,18 +2,18 @@
 
 The simplest react native router yet.
 
-##Install
+#Install
 `npm install react-native-routes --save`
 
 This comes with a __routeHandler__ to help you register routes and optimize your application.
 
-##Require
+#Require
 ```javascript
 var Router = require('react-native-routes').Router;
 var routeHandler = require('react-native-routes').routeHandler;
 ```
 
-##Example
+#Example
 ```js
 /* Bring in a component of some kind. */
 var Home = require('./components/home');
@@ -46,8 +46,8 @@ var Application = React.createClass({
     }
 });
 ```
-##API
-####`this.props.goForward([Object])`
+#API
+`this.props.goForward([Object])`
 Takes a route object that must have a `name` and a `component` property.
 ```js
 var route = {
@@ -67,10 +67,10 @@ and accesses it where ever
 ```js
 this.props.goForward(routeHandler.getRoute('name-of-your-route'));
 ```
-####`this.props.goBackwards()`
+#`this.props.goBackwards()`
 This is very straight forward, tell your application to go back to it's previously rendered route. I mean, straight backward.
 
-####`[function] configureScene`
+#`[function] configureScene`
 You can attach a configureScene function to your route to replace animations and customize them. Do something like this
 ```js
 var route = {
@@ -83,17 +83,17 @@ var route = {
 ```
 Now, there is little-to-none documentation of this, but check out below on the different options you can choose for transitions and things you can do with them for customization.
 
-##Navigator.SceneConfigs
-####`PushFromRight`
-####`FloatFromRight`
-####`FloatFromLeft`
-####`FloatFromBottom`
-####`FloatFromBottomAndroid`
-####`FadeAndroid`
-####`HorizontalSwipeJump`
+#Navigator.SceneConfigs
+`PushFromRight`
+`FloatFromRight`
+`FloatFromLeft`
+`FloatFromBottom`
+`FloatFromBottomAndroid`
+`FadeAndroid`
+`HorizontalSwipeJump`
 
-##In the works...
+#In the works...
 + Adding a `routeHandler.go()` to enable flexible routing.
 
-##Author
+#Author
 @wenkesj feel free to contact me. Fork it!
