@@ -1,99 +1,88 @@
-#react-native-routes
+# react-native-routes #
 
 The simplest react native router yet.
 
-#Install
 `npm install react-native-routes --save`
 
-This comes with a __routeHandler__ to help you register routes and optimize your application.
-
-#Require
+### Requiring ###
 ```javascript
-var Router = require('react-native-routes').Router;
-var routeHandler = require('react-native-routes').routeHandler;
+let Router = require('react-native-routes');
 ```
 
-#Example
+### API ###
+
 ```js
-/* Bring in a component of some kind. */
-var Home = require('./components/home');
-var HomeRoute = {
-    /* A unique name and a component to go with it. */
-    name: 'Home',
-    component: Home,
-    /**
-     * Add an optional scene object, see below!
-     */
-    configureScene: function() {
-        var transition = Navigator.SceneConfigs.FloatFromRight;
-        /* Prevent any swipe gestures? Sure! */
-        transition.gestures = null;
-        return transition;
-    }
-};
-
-/**
- * Register the route with the route handler so you can
- * access routes from anywhere on your application
- */
-routeHandler.registerRoute(HomeRoute);
-
-var Application = React.createClass({
+class Application extends Component {
     render() {
         return (
-            <Router firstRoute={HomeRoute}/>
+            <Router
+              firstRoute={ SomeRoute }
+            />
         );
     }
-});
-```
-#API
-`this.props.goForward([Object])`
-Takes a route object that must have a `name` and a `component` property.
-```js
-var route = {
-    name: 'name-of-your-route',
-    component: AReactComponent
 }
 ```
-You can then call
-```js
-this.props.goForward(route);
-```
-or register the route (basically like lazy loading!)
-```js
-routeHandler.registerRoute(route);
-```
-and accesses it where ever
-```js
-this.props.goForward(routeHandler.getRoute('name-of-your-route'));
-```
-#`this.props.goBackwards()`
-This is very straight forward, tell your application to go back to it's previously rendered route. I mean, straight backward.
 
-#`[function] configureScene`
-You can attach a configureScene function to your route to replace animations and customize them. Do something like this
+#### `this.props.goForward(Route Object)` ####
+
+Call directly on a **Route Object**.
+
 ```js
-var route = {
-    name: 'name-of-your-route',
-    component: AReactComponent,
+let SomeComponent = require('./some-component');
+var SomeRoute = {
+  name: 'SomeComponent',
+  component: SomeComponent,
+  configureScene() {
+    return Navigator.SceneConfigs.FloatFromRight;
+  }
+};
+// ... Inside your Application somewhere ...
+  this.props.goForward(SomeRoute);
+// ...
+```
+
+Call on a registered **Route Object**, used for lazy loading opportunities. See the **example** folder.
+
+```js
+let { SomeRoute } = require('./handler');
+
+// ... Inside your Application somewhere ...
+  this.props.goForward(SomeRoute());
+// ...
+```
+
+#### `this.props.goBackwards()` ####
+Pop the next from the route stack and render.
+
+### Route Objects ###
+
+| Property | Type | Description |
+| -------- | ---- | ----------- |
+| name (\*) | String | Name of the route, i.e. 'SomeComponent'. |
+| component (\*) | Component | **Component** to be rendered when the Router renders the new route. |
+| configureScene | Function | Return the scene configuration for the route. |
+
+(\*) **Required** property
+
+You can attach a **configureScene** function to your route to replace animations and customize them. Do something like this:
+
+```js
+{
+    name: 'SomeComponent',
+    component: SomeComponent,
     configureScene: function() {
         return Navigator.SceneConfigs.FloatFromRight;
     }
 }
 ```
-Now, there is little-to-none documentation of this, but check out below on the different options you can choose for transitions and things you can do with them for customization.
 
-#Navigator.SceneConfigs
-`PushFromRight`
-`FloatFromRight`
-`FloatFromLeft`
-`FloatFromBottom`
-`FloatFromBottomAndroid`
-`FadeAndroid`
-`HorizontalSwipeJump`
+Now, there is little-to-none documentation of this, but check out below on the different options you can choose for transitions and things you can do with them for customization. See the docs for **transitions.md**
 
-#In the works...
-+ Adding a `routeHandler.go()` to enable flexible routing.
-
-#Author
-@wenkesj feel free to contact me. Fork it!
+### Navigator.SceneConfigs ###
++ **PushFromRight**
++ **FloatFromRight**
++ **FloatFromLeft**
++ **FloatFromBottom**
++ **FloatFromBottomAndroid**
++ **FadeAndroid**
++ **HorizontalSwipeJump**

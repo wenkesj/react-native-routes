@@ -1,0 +1,17 @@
+{
+    "esnext": true,
+    "globals": {
+        "__dirname": true,
+        "require": true,
+        "module": true,
+        "exports": true,
+        "console": true,
+        "describe": true,
+        "it": true
+    },
+    "strict": false,
+    "globalstrict": true,
+    "quotmark": "single",
+    "smarttabs": true,
+    "trailing": true
+}
